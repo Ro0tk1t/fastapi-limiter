@@ -32,7 +32,7 @@ class RateLimiter:
         )
         return pexpire
 
-    async def __call__(self, request: Request, response: Response):
+    async def __call__(self, request: Request=None, response: Response=None):
         if not request or not response:
             return
         if not FastAPILimiter.redis:
