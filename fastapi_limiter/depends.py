@@ -33,6 +33,8 @@ class RateLimiter:
         return pexpire
 
     async def __call__(self, request: Request, response: Response):
+        if not request or not response:
+            return
         if not FastAPILimiter.redis:
             raise Exception("You must call FastAPILimiter.init in startup event of fastapi!")
         route_index = 0
